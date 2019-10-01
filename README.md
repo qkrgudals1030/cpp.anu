@@ -43,7 +43,7 @@ int math;
 
 };
 
-void dread(struct member *test) {
+void dread(struct member* test) {
 
 int i;
 
@@ -53,7 +53,7 @@ fp = fopen("dat.txt", "r");
 
 for (i = 0; i < 3; i++) {
 
-fscanf(fp, "%s %d %d %d", test->name, &test->computer, &test->english, &test->math);
+fscanf(fp, "%s %d %d %d", &test->name, &test->computer, &test->english, &test->math);
 
 ++test;
 
@@ -77,13 +77,28 @@ dread(test);
 
 for (i = 0; i < 3; i++)
 
-  printf("%s %d %d %d %d %5.2f\n", test[i].name, test[i].computer, test[i].english, test[i].math, sum(test[i].computer, test[i].english,   test[i].math), Avg(test[i].computer, test[i].english, test[i].math));
+printf("%s %d %d %d %d %5.2f\n", test[i].name, test[i].computer, test[i].english, test[i].math, sum(test[i].computer, test[i].english, test[i].math), Avg(test[i].computer, test[i].english, test[i].math));
 
 printf("Sum %d %d %d\n", sum(test[0].computer, test[1].computer, test[2].computer), sum(test[0].english, test[1].english, test[2].english), sum(test[0].math, test[1].math, test[2].math));
 
 printf("Avg %5.2f %5.2f %5.2f ", Avg(test[0].computer, test[1].computer, test[2].computer), Avg(test[0].english, test[1].english, test[2].english), Avg(test[0].math, test[1].math, test[2].math));
 
 printf("%5.2f", Avg(Avg(test[0].computer, test[0].english, test[0].math), Avg(test[1].computer, test[1].english, test[1].math), Avg(test[2].computer, test[2].english, test[2].math)));
+
+FILE* f;
+
+f = fopen("result.txt", "w");
+
+for (i = 0; i < 3; i++)
+fprintf(f, "%s %d %d %d %d %5.2f\n", test[i].name, test[i].computer, test[i].english, test[i].math, sum(test[i].computer, test[i].english, test[i].math), Avg(test[i].computer, test[i].english, test[i].math));
+
+fprintf(f, "Sum %d %d %d\n", sum(test[0].computer, test[1].computer, test[2].computer), sum(test[0].english, test[1].english, test[2].english), sum(test[0].math, test[1].math, test[2].math));
+
+fprintf(f, "Avg %5.2f %5.2f %5.2f ", Avg(test[0].computer, test[1].computer, test[2].computer), Avg(test[0].english, test[1].english, test[2].english), Avg(test[0].math, test[1].math, test[2].math));
+
+fprintf(f, "%5.2f", Avg(Avg(test[0].computer, test[0].english, test[0].math), Avg(test[1].computer, test[1].english, test[1].math), Avg(test[2].computer, test[2].english, test[2].math)));
+
+fclose(f);
 
 return 0;
 
